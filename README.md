@@ -1,5 +1,5 @@
 <p align="center" >
-  <img src="images/nagad_logo.png" alt="Nagad Logo" height="80" >
+  <img src="https://github.com/muhibbin-munna/nagad_flutter/blob/master/images/nagad_logo.png" alt="Nagad Logo" height="80" >
 </p>
 
  <h1 align="center">Nagad Online Payment
