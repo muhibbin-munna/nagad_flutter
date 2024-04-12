@@ -42,18 +42,18 @@ Nagad nagad = Nagad(
 |additionalFieldValue|20|Value of Additional Field in English|
 
 ```
-Expample:
+Map<String, dynamic> additionalMerchantInfo = {
+        “serviceName” : “T Shirt”,
+        “serviceLogoURL” : “tinyurl.com/sampleLogoUrl”,
+        “additionalFieldNameEN” : “Color”,
+        “additionalFieldNameBN” : “রং”,
+        “additionalFieldValue” : “White”
+    };
 
-{
-    “serviceName” : “T Shirt”,
-    “serviceLogoURL” : “tinyurl.com/sampleLogoUrl”,
-    “additionalFieldNameEN” : “Color”,
-    “additionalFieldNameBN” : “রং”,
-    “additionalFieldValue” : “White”
-}
+nagad.setAdditionalMerchantInfo(additionalMerchantInfo);
 ```
 
->N.B: Additional Merchant Info can be anything and will be saved for further usage. However only these fields will be shown in the payment page.
+>N.B: additionalMerchantInfo must be in Map<String, dynamic> type. Additional Merchant Info can be anything and will be saved for further usage. However only these fields will be shown in the payment page.
 
 ## Regular Payment
 To make a regular merchant payment, use the `pay` method:
