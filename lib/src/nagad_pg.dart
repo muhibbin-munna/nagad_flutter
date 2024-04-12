@@ -24,7 +24,7 @@ class Nagad {
     this.additionalMerchantInfo = additionalMerchantInfo;
   }
 
-  Future<StatusAPIResponse> pay(BuildContext context, {required int amount}) async {
+  Future<StatusAPIResponse> pay(BuildContext context, {required orderId, required double amount}) async {
 
     client = http.Client();
 
@@ -41,7 +41,6 @@ class Nagad {
           "-----BEGIN PRIVATE KEY-----\n${credentials.merchantPrivateKey}\n-----END PRIVATE KEY-----");
 
       DateTime now = DateTime.now();
-      int orderId = now.millisecondsSinceEpoch;
       String datetime = DateFormat('yyyyMMddHHmmss').format(now);
       Uint8List seedBytes = utf8.encode(kpgDefaultSeed);
       String random = generateRandomString(20, seedBytes);

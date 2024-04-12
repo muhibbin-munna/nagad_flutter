@@ -1,39 +1,97 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+<p align="center" >
+  <img src="images/nagad_logo.png" alt="Nagad Logo" height="80" >
+</p>
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+ <h1 align="center">Nagad Online Payment
+API Integration Flutter Package</h1>
+<p align="center" >
+</p>
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+This is a [Flutter package](https://pub.dev/packages/nagad_payment_gateway)  for the merchants and service providers that want to
+incorporate a new online payment method provided by Nagad.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+> Note : Get your merchant credentials by contacting Nagad.
 
-## Features
+### # Credentials to be provided by Nagad
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+```
+final merchantID = "Specific Merchant id"
+final merchantPrivateKey = "Merchant Private Key"
+final pgPublicKey = "Nagad Payment Gateway public Key"
+```
+## Initialize the `Nagad` instance:
+Create an instance of Credentials and provide it to the Nagad Instance: 
 
-## Getting started
+```
+Nagad nagad = Nagad(
+      credentials: const Credentials(
+          merchantID: merchantID,
+          merchantPrivateKey: merchantPrivateKey,
+          pgPublicKey: merchantPrivateKey,
+          isSandbox: true)); // switch to false for production
+```
+> Note: Make sure to replace the provided credentials with your Nagad Sandbox or production credentials.
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+### Set Additional Merchant Info
+| Additional Merchant Info Fields| Length | Description |
+|---------------------------------|------------------|-------------|
+|serviceName|25|Service Name Provided by Merchant|
+|serviceLogoURL|1~1024|Publicly accessible logo URL|
+|additionalFieldName EN|20|Additional Field Name to be shown in Payment Page for Locale EN|
+|additionalFieldName BN|20|Additional Field Name to be shown in Payment Page for Locale BN|
+|additionalFieldValue|20|Value of Additional Field in English|
 
-## Usage
+```
+Expample:
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+{
+    “serviceName” : “T Shirt”,
+    “serviceLogoURL” : “tinyurl.com/sampleLogoUrl”,
+    “additionalFieldNameEN” : “Color”,
+    “additionalFieldNameBN” : “রং”,
+    “additionalFieldValue” : “White”
+}
 ```
 
-## Additional information
+>N.B: Additional Merchant Info can be anything and will be saved for further usage. However only these fields will be shown in the payment page.
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+## Regular Payment
+To make a regular merchant payment, use the `pay` method:
+
+### Parameters
+
+`amount:` The amount for payment</br>
+`orderID:` This is unique identifier to place order for payment. You can use current millisecondsSinceEpoch for uniqueness. 
+
+***Request***
+```
+DateTime now = DateTime.now();
+String orderId = 'order${now.millisecondsSinceEpoch}';
+StatusAPIResponse statusAPIResponse =
+                    await nagad.pay(context, amount: 10.0, orderId: orderId);
+```
+***Response***: 
+StatusAPIResponse contains 
+1. merchantId
+2. orderId
+3. paymentRefId
+4. amount
+5. clientMobileNo
+6. merchantMobileNo
+7. orderDateTime
+8. issuerPaymentDateTime
+9. issuerPaymentRefNo
+10. additionalMerchantInfo
+11. status
+12. statusCode
+13. cancelIssuerDateTime
+14. cancelIssuerRefNo
+15. serviceType
+> N.B: Save the required information to your database if needed 
+
+## License
+
+[nagad_payment_gateway](https://pub.dev/packages/nagad_payment_gateway) package is licensed under the [GNU General Public License (GPL) version 3.0](https://www.gnu.org/licenses/gpl-3.0.html).
+
+©2024
+

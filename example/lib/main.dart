@@ -60,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -73,16 +74,22 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Text('Make Payment'),
               onPressed: () async {
                 error = '';
+
+                DateTime now = DateTime.now();
+                String orderId = 'order${now.millisecondsSinceEpoch}';
+
                 try {
                   StatusAPIResponse statusAPIResponse =
-                      await nagad.pay(context, amount: 10);
+                      await nagad.pay(context, amount: 10.25, orderId: orderId);
+                  print(statusAPIResponse);
+
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => PGResponse(
                               statusAPIResponse: statusAPIResponse)));
 
-                  print(statusAPIResponse);
+
                 } catch (e) {
                   print(e);
                   setState(() {
