@@ -13,10 +13,11 @@ import 'package:hex/hex.dart';
 import 'package:http/http.dart' as http;
 import 'package:nagad_payment_gateway/src/status_model.dart';
 import 'package:nagad_payment_gateway/src/webview_pg.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class Nagad {
   late http.Client client;
-  Credentials credentials;
+  NagadCredentials credentials;
   Map<String, dynamic> additionalMerchantInfo = {};
   Nagad({required this.credentials});
 
@@ -24,17 +25,21 @@ class Nagad {
     this.additionalMerchantInfo = additionalMerchantInfo;
   }
 
-  Future<StatusAPIResponse> pay(BuildContext context, {required orderId, required double amount}) async {
-
+  Future<StatusAPIResponse> pay(BuildContext context,
+      {required orderId, required double amount}) async {
+    String ipAddress = '';
     client = http.Client();
+    final List<ConnectivityResult> connectivityResult =
+        await (Connectivity().checkConnectivity());
 
     String baseUrl = credentials.isSandbox
         ? "https://sandbox-ssl.mynagad.com"
         : "https://api.mynagad.com";
 
-    final String kpgDefaultSeed = ("nagad-dfs-service-ltd${DateTime.now().millisecondsSinceEpoch}");
+    final String kpgDefaultSeed =
+        ("nagad-dfs-service-ltd${DateTime.now().millisecondsSinceEpoch}");
     try {
-      CryptoUtility cryptoUtility = new CryptoUtility();
+      CryptoUtility cryptoUtility = CryptoUtility();
       final publicKey = await cryptoUtility.getPublicKey(
           '-----BEGIN PUBLIC KEY-----\n${credentials.pgPublicKey}\n-----END PUBLIC KEY-----');
       final privateKey = await cryptoUtility.getPrivateKey(
@@ -61,6 +66,13 @@ class Nagad {
           Signer(RSASigner(RSASignDigest.SHA256, privateKey: privateKey));
       var signature = signer.sign(rawDataToBeEncrypted).base64;
 
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        ipAddress = await _getIPAddress();
+      } else {
+        throw 'Device is not connected to a network';
+      }
+
       http.Response response;
       try {
         response = await client.post(
@@ -68,10 +80,9 @@ class Nagad {
               '$baseUrl/api/dfs/check-out/initialize/${credentials.merchantID}/$orderId'),
           headers: {
             HttpHeaders.contentTypeHeader: 'application/json',
-            'X-KM-IP-V4': '192.168.0.1',
-            'X-KM-Client-Type': 'PC_WEB',
+            'X-KM-IP-V4': ipAddress,
+            'X-KM-Client-Type': 'MOBILE_APP',
             'X-KM-Api-Version': 'v-0.2.0',
-            "Access-Control-Allow-Origin": "*",
           },
           body: jsonEncode({
             'dateTime': datetime,
@@ -80,7 +91,7 @@ class Nagad {
           }),
         );
       } catch (e) {
-        throw 'Exception in Check Out Initialize API API $e';
+        throw 'Exception in Check Out Initialize API $e';
       }
 
       if (response.statusCode == 200) {
@@ -96,7 +107,7 @@ class Nagad {
         var decryptedData = decrypter.decrypt64(sensitiveData);
         var verify = verifier.verify64(decryptedData, signature);
 
-        if(verify){
+        if (verify) {
           Map<String, dynamic> decryptedDataBody = json.decode(decryptedData);
           String challenge = decryptedDataBody['challenge'];
           String paymentReferenceId = decryptedDataBody['paymentReferenceId'];
@@ -119,8 +130,8 @@ class Nagad {
                   '$baseUrl/api/dfs/check-out/complete/$paymentReferenceId'),
               headers: {
                 HttpHeaders.contentTypeHeader: 'application/json',
-                'X-KM-IP-V4': '192.168.0.1',
-                'X-KM-Client-Type': 'PC_WEB',
+                'X-KM-IP-V4': ipAddress,
+                'X-KM-Client-Type': 'MOBILE_APP',
                 'X-KM-Api-Version': 'v-0.2.0',
               },
               body: jsonEncode({
@@ -142,25 +153,20 @@ class Nagad {
               MaterialPageRoute(
                   builder: (context) => WebViewContainer(
                       callBackUrl: apiResponse.callBackUrl,
+                      ipAddress: ipAddress,
                       isSandbox: credentials.isSandbox)),
             );
             Map<String, dynamic> jsonMap = json.decode(paymentStatus);
 
-            return(StatusAPIResponse.fromJson(jsonMap));
-
+            return (StatusAPIResponse.fromJson(jsonMap));
           } else {
-            throw
-            'Check Out Complete API failed with status: ${response.statusCode}, message: ${response.body}';
+            throw 'Check Out Complete API failed with status: ${response.statusCode}, message: ${response.body}';
           }
-        }
-        else{
+        } else {
           throw 'Signature Verification Failed';
         }
-
-
       } else {
-        throw
-            'Check Out Initialize API failed with status: ${response.statusCode}, message: ${response.body}';
+        throw 'Check Out Initialize API failed with status: ${response.statusCode}, message: ${response.body}';
       }
     } catch (e) {
       throw 'Failed $e';
@@ -176,5 +182,16 @@ class Nagad {
     }
     String hexString = HEX.encode(secure);
     return hexString;
+  }
+
+  Future<String> _getIPAddress() async {
+    for (var interface in await NetworkInterface.list()) {
+      for (var addr in interface.addresses) {
+        if (!addr.isLoopback && addr.type == InternetAddressType.IPv4) {
+          return addr.address;
+        }
+      }
+    }
+    throw 'Unable to get IP address';
   }
 }

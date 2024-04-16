@@ -52,22 +52,22 @@ class StatusAPIResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['merchantId'] = this.merchantId;
-    data['orderId'] = this.orderId;
-    data['paymentRefId'] = this.paymentRefId;
-    data['amount'] = this.amount;
-    data['clientMobileNo'] = this.clientMobileNo;
-    data['merchantMobileNo'] = this.merchantMobileNo;
-    data['orderDateTime'] = this.orderDateTime;
-    data['issuerPaymentDateTime'] = this.issuerPaymentDateTime;
-    data['issuerPaymentRefNo'] = this.issuerPaymentRefNo;
-    data['additionalMerchantInfo'] = this.additionalMerchantInfo;
-    data['status'] = this.status;
-    data['statusCode'] = this.statusCode;
-    data['cancelIssuerDateTime'] = this.cancelIssuerDateTime;
-    data['cancelIssuerRefNo'] = this.cancelIssuerRefNo;
-    data['serviceType'] = this.serviceType;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['merchantId'] = merchantId;
+    data['orderId'] = orderId;
+    data['paymentRefId'] = paymentRefId;
+    data['amount'] = amount;
+    data['clientMobileNo'] = clientMobileNo;
+    data['merchantMobileNo'] = merchantMobileNo;
+    data['orderDateTime'] = orderDateTime;
+    data['issuerPaymentDateTime'] = issuerPaymentDateTime;
+    data['issuerPaymentRefNo'] = issuerPaymentRefNo;
+    data['additionalMerchantInfo'] = additionalMerchantInfo;
+    data['status'] = status;
+    data['statusCode'] = statusCode;
+    data['cancelIssuerDateTime'] = cancelIssuerDateTime;
+    data['cancelIssuerRefNo'] = cancelIssuerRefNo;
+    data['serviceType'] = serviceType;
     return data;
   }
 }

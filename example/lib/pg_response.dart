@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:nagad_payment_gateway/nagad_payment_gateway.dart';
@@ -7,7 +5,7 @@ import 'package:nagad_payment_gateway/nagad_payment_gateway.dart';
 class PGResponse extends StatefulWidget {
   StatusAPIResponse statusAPIResponse;
 
-  PGResponse({required this.statusAPIResponse});
+  PGResponse({super.key, required this.statusAPIResponse});
 
   @override
   _PGResponseState createState() => _PGResponseState();
@@ -18,7 +16,7 @@ class _PGResponseState extends State<PGResponse> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Payment Status'),
+        title: const Text('Payment Status'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -52,7 +50,7 @@ class _PGResponseState extends State<PGResponse> {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Text(
         '$label: $value',
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }

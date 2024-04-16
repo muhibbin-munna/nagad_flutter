@@ -6,18 +6,18 @@ class CryptoUtility {
   String pub_key = "";
   String pri_key = "";
 
-  CryptoUtility(){}
+  CryptoUtility();
 
-  Future getPublicKey(String pub_key) async {
-    this.pub_key = pub_key;
+  Future getPublicKey(String pubKey) async {
+    pub_key = pubKey;
     final parser = RSAKeyParser();
-    return parser.parse(pub_key);
+    return parser.parse(pubKey);
   }
 
-  Future getPrivateKey(String pri_key) async {
-    this.pri_key = pri_key;
+  Future getPrivateKey(String priKey) async {
+    pri_key = priKey;
     final parser = RSAKeyParser();
-    return parser.parse(pri_key);
+    return parser.parse(priKey);
   }
 
   Future writeToFile(ByteData data, String path) {

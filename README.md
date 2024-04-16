@@ -63,15 +63,17 @@ To make a regular merchant payment, use the `pay` method:
 `amount:` The amount for payment</br>
 `orderID:` This is unique identifier to place order for payment. You can use current millisecondsSinceEpoch for uniqueness. 
 
-***Request***
 ```
 DateTime now = DateTime.now();
 String orderId = 'order${now.millisecondsSinceEpoch}';
-StatusAPIResponse statusAPIResponse =
-                    await nagad.pay(context, amount: 10.0, orderId: orderId);
 ```
-***Response***: 
-StatusAPIResponse contains 
+***Request***
+```
+StatusAPIResponse statusAPIResponse = await nagad.pay(context, amount: 10.0, orderId: orderId);
+```
+***Response***
+
+StatusAPIResponse contains: 
 1. merchantId
 2. orderId
 3. paymentRefId

@@ -6,8 +6,9 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewContainer extends StatefulWidget {
   final String callBackUrl;
+  final String ipAddress;
   final bool isSandbox;
-  WebViewContainer({required this.callBackUrl, required this.isSandbox});
+  const WebViewContainer({super.key, required this.callBackUrl, required this.ipAddress, required this.isSandbox});
 
   @override
   _WebViewContainerState createState() => _WebViewContainerState(callBackUrl);
@@ -28,16 +29,16 @@ class _WebViewContainerState extends State<WebViewContainer> {
       onPageFinished: (String url) {},
       onWebResourceError: (WebResourceError error) {},
       onNavigationRequest: (NavigationRequest request) async {
-        String ref_id = '';
+        String refId = '';
         if(request.url.contains('check-out/abort')){
-          ref_id = extractDataFromUrl(request.url) ?? '';
+          refId = extractDataFromUrl(request.url) ?? '';
         }else if(request.url.contains('https://www.callbackurlflutter.com')){
           Uri uri = Uri.parse(request.url);
           Map<String, String> queryParams = uri.queryParameters;
-          ref_id = queryParams["payment_ref_id"] ?? '';
+          refId = queryParams["payment_ref_id"] ?? '';
         }
-        if(ref_id.isNotEmpty){
-          var response = await verifyPayment(ref_id);
+        if(refId.isNotEmpty){
+          var response = await verifyPayment(widget.ipAddress, refId);
           Navigator.of(context).pop(response);
         }
         return NavigationDecision.prevent;
@@ -51,14 +52,14 @@ class _WebViewContainerState extends State<WebViewContainer> {
     );
   }
 
-  Future<String> verifyPayment(payment_ref_id) async {
+  Future<String> verifyPayment(ipAddress, paymentRefId) async {
     try {
       String baseUrl = widget.isSandbox? "https://sandbox-ssl.mynagad.com": "https://api.mynagad.com";
-      final String url = '$baseUrl/api/dfs/verify/payment/$payment_ref_id';
+      final String url = '$baseUrl/api/dfs/verify/payment/$paymentRefId';
 
       http.Response response = await http.get(Uri.parse(url), headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
-        'X-KM-IP-V4': '192.168.0.1',
+        'X-KM-IP-V4': ipAddress,
         'X-KM-Client-Type': 'MOBILE_APP',
         'X-KM-Api-Version': 'v-0.2.0',
       },);
