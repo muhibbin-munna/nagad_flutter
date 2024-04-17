@@ -12,7 +12,7 @@ incorporate a new online payment method provided by Nagad.
 
 > Note : Get your merchant credentials by contacting Nagad.
 
-### # Credentials to be provided by Nagad
+### Credentials to be provided by Nagad
 
 ```
 final merchantID = "Specific Merchant id"
@@ -58,22 +58,23 @@ nagad.setAdditionalMerchantInfo(additionalMerchantInfo);
 ## Regular Payment
 To make a regular merchant payment, use the `pay` method:
 
+
+***Request***
+```
+final nagadResponse = await nagad.regularPayment(context, amount: 10.25, orderId: orderId);
+```
 ### Parameters
 
-`amount:` The amount for payment</br>
+`amount:` The amount for payment. Recommended as double.</br>
 `orderID:` This is unique identifier to place order for payment. You can use current millisecondsSinceEpoch for uniqueness. 
 
 ```
 DateTime now = DateTime.now();
 String orderId = 'order${now.millisecondsSinceEpoch}';
 ```
-***Request***
-```
-StatusAPIResponse statusAPIResponse = await nagad.pay(context, amount: 10.0, orderId: orderId);
-```
 ***Response***
 
-StatusAPIResponse contains: 
+nagadResponse contains: 
 1. merchantId
 2. orderId
 3. paymentRefId

@@ -79,15 +79,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 String orderId = 'order${now.millisecondsSinceEpoch}';
 
                 try {
-                  StatusAPIResponse statusAPIResponse =
-                      await nagad.pay(context, amount: 10.25, orderId: orderId);
-                  print(statusAPIResponse);
-
+                  final nagadResponse = await nagad.regularPayment(context, amount: 10.25, orderId: orderId);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => PGResponse(
-                              statusAPIResponse: statusAPIResponse)));
+                              nagadResponse: nagadResponse)));
 
 
                 } catch (e) {
@@ -95,7 +92,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(() {
                     error = e.toString();
                   });
-
                 }
               },
             ),

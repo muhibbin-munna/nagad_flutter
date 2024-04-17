@@ -5,13 +5,12 @@ import 'dart:math';
 import 'package:encrypt/encrypt.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:nagad_payment_gateway/src/api_resposne.dart';
 import 'package:nagad_payment_gateway/src/credentials.dart';
 import 'package:nagad_payment_gateway/src/crypto_utility.dart';
 import 'package:intl/intl.dart';
 import 'package:hex/hex.dart';
 import 'package:http/http.dart' as http;
-import 'package:nagad_payment_gateway/src/status_model.dart';
+import 'package:nagad_payment_gateway/src/response_model.dart';
 import 'package:nagad_payment_gateway/src/webview_pg.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
@@ -25,7 +24,7 @@ class Nagad {
     this.additionalMerchantInfo = additionalMerchantInfo;
   }
 
-  Future<StatusAPIResponse> pay(BuildContext context,
+  Future<NagadResponse> regularPayment(BuildContext context,
       {required orderId, required double amount}) async {
     String ipAddress = '';
     client = http.Client();
@@ -146,19 +145,18 @@ class Nagad {
           }
 
           if (response.statusCode == 200) {
-            ApiResponse apiResponse = ApiResponse.fromJson(response.body);
-
+            Map<String, dynamic> apiResponse = jsonDecode(response.body);
             var paymentStatus = await Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => WebViewContainer(
-                      callBackUrl: apiResponse.callBackUrl,
+                      callBackUrl: apiResponse['callBackUrl'],
                       ipAddress: ipAddress,
                       isSandbox: credentials.isSandbox)),
             );
             Map<String, dynamic> jsonMap = json.decode(paymentStatus);
 
-            return (StatusAPIResponse.fromJson(jsonMap));
+            return (NagadResponse.fromJson(jsonMap));
           } else {
             throw 'Check Out Complete API failed with status: ${response.statusCode}, message: ${response.body}';
           }

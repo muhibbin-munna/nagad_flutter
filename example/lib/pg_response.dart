@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:nagad_payment_gateway/nagad_payment_gateway.dart';
 
 class PGResponse extends StatefulWidget {
-  StatusAPIResponse statusAPIResponse;
+  NagadResponse nagadResponse;
 
-  PGResponse({super.key, required this.statusAPIResponse});
+  PGResponse({super.key, required this.nagadResponse});
 
   @override
   _PGResponseState createState() => _PGResponseState();
@@ -23,21 +23,21 @@ class _PGResponseState extends State<PGResponse> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Merchant ID: ${widget.statusAPIResponse.merchantId ?? ''}'),
-            Text('Order ID: ${widget.statusAPIResponse.orderId ?? ''}'),
-            Text('Payment Ref ID: ${widget.statusAPIResponse.paymentRefId ?? ''}'),
-            Text('Amount: ${widget.statusAPIResponse.amount ?? ''}'),
-            Text('Client Mobile No: ${widget.statusAPIResponse.clientMobileNo ?? ''}'),
-            Text('Merchant Mobile No: ${widget.statusAPIResponse.merchantMobileNo ?? ''}'),
-            Text('Order Date Time: ${widget.statusAPIResponse.orderDateTime ?? ''}'),
-            Text('Issuer Payment Date Time: ${widget.statusAPIResponse.issuerPaymentDateTime ?? ''}'),
-            Text('Issuer Payment Ref No: ${widget.statusAPIResponse.issuerPaymentRefNo ?? ''}'),
-            Text('Additional Merchant Info: ${widget.statusAPIResponse.additionalMerchantInfo ?? ''}'),
-            Text('Status: ${widget.statusAPIResponse.status ?? ''}'),
-            Text('Status Code: ${widget.statusAPIResponse.statusCode ?? ''}'),
-            Text('Cancel Issuer Date Time: ${widget.statusAPIResponse.cancelIssuerDateTime ?? ''}'),
-            Text('Cancel Issuer Ref No: ${widget.statusAPIResponse.cancelIssuerRefNo ?? ''}'),
-            Text('Service Type: ${widget.statusAPIResponse.serviceType ?? ''}'),
+            Text('Merchant ID: ${widget.nagadResponse.merchantId ?? ''}'),
+            Text('Order ID: ${widget.nagadResponse.orderId ?? ''}'),
+            Text('Payment Ref ID: ${widget.nagadResponse.paymentRefId ?? ''}'),
+            Text('Amount: ${widget.nagadResponse.amount ?? ''}'),
+            Text('Client Mobile No: ${widget.nagadResponse.clientMobileNo ?? ''}'),
+            Text('Merchant Mobile No: ${widget.nagadResponse.merchantMobileNo ?? ''}'),
+            Text('Order Date Time: ${widget.nagadResponse.orderDateTime ?? ''}'),
+            Text('Issuer Payment Date Time: ${widget.nagadResponse.issuerPaymentDateTime ?? ''}'),
+            Text('Issuer Payment Ref No: ${widget.nagadResponse.issuerPaymentRefNo ?? ''}'),
+            Text('Additional Merchant Info: ${widget.nagadResponse.additionalMerchantInfo ?? ''}'),
+            Text('Status: ${widget.nagadResponse.status ?? ''}'),
+            Text('Status Code: ${widget.nagadResponse.statusCode ?? ''}'),
+            Text('Cancel Issuer Date Time: ${widget.nagadResponse.cancelIssuerDateTime ?? ''}'),
+            Text('Cancel Issuer Ref No: ${widget.nagadResponse.cancelIssuerRefNo ?? ''}'),
+            Text('Service Type: ${widget.nagadResponse.serviceType ?? ''}'),
           ],
         )
 

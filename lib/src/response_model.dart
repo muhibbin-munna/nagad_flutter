@@ -1,4 +1,4 @@
-class StatusAPIResponse {
+class NagadResponse {
   String? merchantId;
   String? orderId;
   String? paymentRefId;
@@ -16,7 +16,7 @@ class StatusAPIResponse {
   String? serviceType;
 
 
-  StatusAPIResponse(
+  NagadResponse(
       {this.merchantId,
         this.orderId,
         this.paymentRefId,
@@ -33,7 +33,7 @@ class StatusAPIResponse {
         this.cancelIssuerRefNo,
         this.serviceType});
 
-  StatusAPIResponse.fromJson(Map<String, dynamic> json) {
+  NagadResponse.fromJson(Map<String, dynamic> json) {
     merchantId = json['merchantId'];
     orderId = json['orderId'];
     paymentRefId = json['paymentRefId'];
