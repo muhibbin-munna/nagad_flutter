@@ -3,19 +3,19 @@ import 'package:encrypt/encrypt.dart';
 import 'package:flutter/services.dart';
 
 class CryptoUtility {
-  String pub_key = "";
-  String pri_key = "";
+  String? publicKey;
+  String? privateKey;
 
   CryptoUtility();
 
   Future getPublicKey(String pubKey) async {
-    pub_key = pubKey;
+    publicKey = pubKey;
     final parser = RSAKeyParser();
     return parser.parse(pubKey);
   }
 
   Future getPrivateKey(String priKey) async {
-    pri_key = priKey;
+    privateKey = priKey;
     final parser = RSAKeyParser();
     return parser.parse(priKey);
   }
