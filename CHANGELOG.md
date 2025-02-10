@@ -29,3 +29,7 @@
 ## 0.2.0
 
 * Updated example code and documentation.
+
+## 0.2.1
+
+* Updated readme.
