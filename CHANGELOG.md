@@ -28,4 +28,4 @@
 
 ## 0.2.0
 
-* Updated functionality.
+* Updated example code and documentation.
