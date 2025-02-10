@@ -1,4 +1,4 @@
-library nagad_payment_gateway;
+library pgw;
 
 export 'src/nagad_pg.dart';
 export 'src/credentials.dart';
