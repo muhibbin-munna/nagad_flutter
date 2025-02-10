@@ -25,3 +25,7 @@
 ## 0.1.6
 
 * Changed Function.
+
+## 0.2.0
+
+* Updated functionality.

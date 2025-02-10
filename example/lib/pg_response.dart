@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nagad_payment_gateway/pgw.dart';
+import 'package:nagad_payment_gateway/nagad_payment_gateway.dart';
 
 class PGResponse extends StatelessWidget {
   final NagadResponse nagadResponse;

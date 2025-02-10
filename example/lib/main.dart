@@ -1,6 +1,6 @@
 import 'package:example/pg_response.dart';
 import 'package:flutter/material.dart';
-import 'package:nagad_payment_gateway/pgw.dart';
+import 'package:nagad_payment_gateway/nagad_payment_gateway.dart';
 
 void main() {
   runApp(const MyApp());
