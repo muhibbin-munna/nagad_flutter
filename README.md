@@ -9,9 +9,6 @@ API Integration Flutter Package</h1>
 
 The [nagad_payment_gateway](https://pub.dev/packages/nagad_payment_gateway)  package allows Flutter developers to integrate Nagad Online Payment into their applications. This package is ideal for merchants and service providers looking to enable digital payments using Nagad.
 
-## ⚠️ Security Warning
-**Do not store merchant credentials directly in your Flutter application.** Instead, use a secure backend server to handle payments securely and prevent exposure of sensitive data.
-
 ### Credentials Provided by Nagad
 
 Before integrating, obtain your credentials from Nagad:
@@ -112,6 +109,9 @@ When moving to production:
 - Change `isSandbox: false`.
 - Replace Sandbox credentials with production credentials.
 - Ensure your merchant account is verified by Nagad.
+
+## ⚠️ Security Warning
+**Do not store merchant credentials directly in your Flutter application.** Instead, use a secure backend server to handle payments securely and prevent exposure of sensitive data.
 
 ## ⚠️ Best Practices
 ✅ **Use a backend server** to securely process payments and store credentials.  
