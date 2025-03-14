@@ -15,23 +15,22 @@ class NagadResponse {
   String? cancelIssuerRefNo;
   String? serviceType;
 
-
   NagadResponse(
       {this.merchantId,
-        this.orderId,
-        this.paymentRefId,
-        this.amount,
-        this.clientMobileNo,
-        this.merchantMobileNo,
-        this.orderDateTime,
-        this.issuerPaymentDateTime,
-        this.issuerPaymentRefNo,
-        this.additionalMerchantInfo,
-        this.status,
-        this.statusCode,
-        this.cancelIssuerDateTime,
-        this.cancelIssuerRefNo,
-        this.serviceType});
+      this.orderId,
+      this.paymentRefId,
+      this.amount,
+      this.clientMobileNo,
+      this.merchantMobileNo,
+      this.orderDateTime,
+      this.issuerPaymentDateTime,
+      this.issuerPaymentRefNo,
+      this.additionalMerchantInfo,
+      this.status,
+      this.statusCode,
+      this.cancelIssuerDateTime,
+      this.cancelIssuerRefNo,
+      this.serviceType});
 
   NagadResponse.fromJson(Map<String, dynamic> json) {
     merchantId = json['merchantId'];

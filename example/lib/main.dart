@@ -45,8 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
             merchantPrivateKey: '', // Provide the merchantPrivateKey
             pgPublicKey: '', // Provide the pgPublicKey
             isSandbox: true // set false for production
-        )
-    );
+            ));
 
     nagad.setAdditionalMerchantInfo({
       'serviceName': 'Brand',

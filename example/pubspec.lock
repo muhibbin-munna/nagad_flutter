@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: args
-      sha256: bf9f5caeea8d8fe6721a9c358dd8a5c1947b27f1cfaa18b39c301273594919e6
+      sha256: d0481093c50b1da8910eb0bb301626d4d8eb7284aa739614d2b394ee09e3ea04
       url: "https://pub.dev"
     source: hosted
-    version: "2.6.0"
+    version: "2.7.0"
   asn1lib:
     dependency: transitive
     description:
@@ -254,7 +254,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.2.1"
+    version: "0.3.0"
   nm:
     dependency: transitive
     description:
@@ -376,10 +376,10 @@ packages:
     dependency: transitive
     description:
       name: web
-      sha256: cd3543bd5798f6ad290ea73d210f423502e71900302dde696f8bff84bf89a1cb
+      sha256: "868d88a33d8a87b18ffc05f9f030ba328ffefba92d6c127917a2ba740f9cfe4a"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.1"
   webview_flutter:
     dependency: transitive
     description:
@@ -392,10 +392,10 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter_android
-      sha256: "5568f17a9c25c0fdd0737900fa1c2d1fee2d780bc212d9aec10c2d1f48ef0f59"
+      sha256: "631093a7fbd93e9690ac61d8c8f3e857efbc189fc33f712b9ad6c01a623517ef"
       url: "https://pub.dev"
     source: hosted
-    version: "4.3.1"
+    version: "4.3.3"
   webview_flutter_platform_interface:
     dependency: transitive
     description:
@@ -408,10 +408,10 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter_wkwebview
-      sha256: "8e0593559bfecd35eb1757d6907ed6b995a41ef82607d6113df897c2805ce6be"
+      sha256: c49a98510080378b1525132f407a92c3dcd3b7145bef04fb8137724aadcf1cf0
       url: "https://pub.dev"
     source: hosted
-    version: "3.18.0"
+    version: "3.18.4"
   xml:
     dependency: transitive
     description:
@@ -421,5 +421,5 @@ packages:
     source: hosted
     version: "6.5.0"
 sdks:
-  dart: ">=3.6.1 <4.0.0"
-  flutter: ">=3.24.0"
+  dart: ">=3.6.0 <4.0.0"
+  flutter: ">=3.27.0"

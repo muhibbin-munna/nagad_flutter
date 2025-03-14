@@ -1,11 +1,11 @@
 name: nagad_payment_gateway
 description: "A Flutter package for Nagad Online Payment API (Sandbox) Integration"
-version: 0.2.1
+version: 0.3.0
 homepage: https://github.com/muhibbin-munna/nagad_flutter
 
 environment:
-  sdk: '>=3.6.1 <4.0.0'
-  flutter: ">=2.5.0"
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.0.0"
 
 dependencies:
   flutter:

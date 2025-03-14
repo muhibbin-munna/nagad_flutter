@@ -4,7 +4,6 @@ class NagadCredentials {
   final String pgPublicKey;
   final bool isSandbox;
 
-
   const NagadCredentials({
     required this.merchantID,
     required this.merchantPrivateKey,
