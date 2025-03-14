@@ -1,3 +1,6 @@
+## 0.3.1
+* logo update readme.
+
 ## 0.3.0
 * version update.
 

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="images/nagad_logo.png?raw=true" alt="Nagad Logo" height="80" style="display: block; margin: 0 auto;">
+  <img src="https://github.com/muhibbin-munna/nagad_flutter/blob/master/images/nagad_logo.png?raw=true" alt="Nagad Logo" height="80" style="display: block; margin: 0 auto;">
 </p>
 
 
